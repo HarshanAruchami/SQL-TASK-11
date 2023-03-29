@@ -78,3 +78,30 @@ create table library(stu_id int references students(stu_id), staff_id int refere
 insert into library values(101,1),(102,2),(103,3),(104,4),(105,5)
 --SELECT QUERY
 select * from library
+--TRUNCATE TABLE
+truncate table library
+---------------------------------------------------------------------------------------------------------------------------
+select * from students--parent
+select * from staff--parent
+select * from library--child
+---------------------------------------------------------------------------------------------------------------------------
+alter table library drop constraint [FK__library__staff_i__73BA3083]
+alter table library drop constraint [FK__library__stu_id__72C60C4A]
+alter table library drop column stu_id
+alter table library drop column staff_id
+
+alter table library add stu_id int default 101 constraint FK__library__stu_id__library_stud foreign key(stu_id) references students(stu_id) on update set default
+alter table library add staff_id int default 4 constraint FK__library__staff_i__library_staff foreign key(staff_id) references staff(staff_id) on update set default
+
+select * from students--parent
+select * from library--child
+
+--TRUNCATE TABLE
+truncate table library
+drop table library
+
+insert into library(stu_id) values (101)
+insert into library(staff_id) values (1)
+
+delete from library where staff_id=2           
+---------------------------------------------------------------------------------------------------------------------------       
